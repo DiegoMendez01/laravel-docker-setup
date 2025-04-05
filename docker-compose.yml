@@ -17,6 +17,14 @@ services:
     networks:
       - laravel_network
   php:
+    build:
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    volumes:
+      - ./src:/var/www/html:delegated
+    container_name: laravel_php
+    networks:
+      - laravel_network
   mysql:
   phpmyadmin:
   composer:
