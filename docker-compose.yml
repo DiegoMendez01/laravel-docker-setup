@@ -53,4 +53,21 @@ services:
     networks:
       - laravel_network
   composer:
+    build:
+      context: .
+      dockerfile: dockerfiles/composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - laravel_network
   artisan:
+    build:
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["php", "/var/www/html/artisan"]
+    networks:
+      - laravel_network
