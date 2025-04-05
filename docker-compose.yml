@@ -26,6 +26,31 @@ services:
     networks:
       - laravel_network
   mysql:
+    image: mysql:8.0.1
+    restart: unless-stopped
+    tty: true
+    container_name: laravel_mysql
+    env_file:
+      - mysql/.env
+    ports:
+      - 3306:3306
+    networks:
+      - laravel_network
+    volumes:
+      - ./mysql/data:/var/lib/mysql
   phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    container_name: laravel_phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - 8090:80
+    environment:
+      - PMA_HOST=value
+      - PMA_USER=root
+      - PMA_PASSWORD=root.pa55
+    networks:
+      - laravel_network
   composer:
   artisan:
