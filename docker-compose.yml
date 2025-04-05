@@ -1,0 +1,9 @@
+networks:
+  laravel_network:
+services:
+  server:
+  php:
+  mysql:
+  phpmyadmin:
+  composer:
+  artisan:
